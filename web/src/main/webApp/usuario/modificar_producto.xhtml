@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" >
+
+<ui:composition template="../web-inf/template.xhtml">
+    <ui:define name="Titulo">Modificar Producto</ui:define>
+    <ui:define name="content">
+        <h:form >
+            <div class="row d-flex" >
+                <div class="col-lg-auto col-md-auto" style="text-align: center" >
+                    <p:graphicImage url="/uploads/#{modificarProductoBean.productoActual.imagenPrincipal}" style="max-width: 120px"  />
+
+                </div>
+                <div class="col-lg-8 col-md-12 align-self-center" >
+                    <p:outputPanel>
+                        <h:panelGrid columns="2" cellpadding="2">
+                            <h:outputText value="Nombre:" />
+                            <h:outputText value="#{modificarProductoBean.productoActual.nombre}" style="font-weight:bold" />
+                            <h:outputText value="Precio:" />
+                            <h:outputText value="$#{modificarProductoBean.productoActual.precio}" style="..." />
+
+                        </h:panelGrid>
+                    </p:outputPanel>
+                    <div class="box">
+                        <h:outputText value="#{modificarProductoBean.productoActual.descripcion}" escape="false" style="..." />
+
+                        <p>Ciudad: #{modificarProductoBean.productoActual.ciudadProducto.nombre}</p>
+                        <h:outputText value="Categoria:" />
+                        <h:outputText value="#{modificarProductoBean.productoActual.categorias}" escape="false" style="..." />
+
+                    </div>
+                </div>
+            </div>
+
+        </h:form>
+        <p:panel header="Modificar Producto">
+            <h:form>
+                <h:panelGrid columns="3" cellpadding="6">
+                    <p:outputLabel value="Modificar Nombre:" for="nombre_p"/>
+                    <p:inputText id="nombre_p" value="#{modificarProductoBean.productoActual.nombre}" />
+                    <h:outputText value="#{modificarProductoBean.productoActual.nombre}" style="..." />
+
+
+                    <p:outputLabel value="Modificar Precio:" for="precio_p"/>
+                    <p:inputText id="precio_p" value="#{modificarProductoBean.productoActual.precio}" type="number"/>
+                    <h:outputText value="$#{modificarProductoBean.productoActual.precio}" style="..." />
+
+
+                    <p:outputLabel value="Modificar Unidades:" for="unidades_p"/>
+                    <p:inputText id="unidades_p" value="#{modificarProductoBean.productoActual.unidades}"  type="number"/>
+                    <h:outputText value="#{modificarProductoBean.productoActual.unidades}" style="..." />
+
+                    <p:outputLabel value="Modificar Descuento:" for="descuento_p"/>
+                    <p:inputText id="descuento_p" value="#{modificarProductoBean.productoActual.descuento}"  type="number"/>
+                    <h:outputText value="#{modificarProductoBean.productoActual.descuento}%" style="..." />
+
+                    <p:outputLabel value="Ciudad:" for="ciudad_p"/>
+                    <p:selectOneMenu id="ciudad_p" value="#{modificarProductoBean.productoActual.ciudadProducto}" converter="#{ciudadConverter}">
+                        <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true"/>
+                        <f:selectItems value="#{productoBean.ciudades}" var="ciudad" itemLabel="#{ciudad.nombre}"/>
+                    </p:selectOneMenu>
+                    <h:outputText value="#{modificarProductoBean.productoActual.ciudadProducto.nombre}" style="..." />
+
+                </h:panelGrid>
+                <h:panelGrid columns="2" cellpadding="1">
+                    <p:outputLabel value="Modificar Descripcion:" for="descripcion_p"/>
+                    <p:textEditor id="descripcion_p" value="#{modificarProductoBean.productoActual.descripcion}" height="100" secure="false"/>
+                </h:panelGrid>
+
+
+                <p:growl showDetail="true"/>
+                <p:commandButton value="Modificar producto" action="#{modificarProductoBean.modificarProducto}" update="@form" icon="pi pi-plus"  />
+
+
+            </h:form>
+        </p:panel>
+
+
+
+
+
+    </ui:define>
+</ui:composition>
+
+</html>

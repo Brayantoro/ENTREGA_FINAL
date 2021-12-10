@@ -1,0 +1,38 @@
+#info-sesion2{
+    position: relative;
+}
+#info-sesion2 > * {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 15px;
+}
+
+#info-sesion2> h5{
+    margin-bottom: 0;
+}
+
+
+.imagen-producto{
+    max-width: 120px;
+}
+
+
+.cajonprueba{
+    width: 200px;
+    height: 200px;
+    background: blue;
+    border: 10px;
+    margin: 10px;
+    text-align: center;
+    color: #6a1a21;
+}
+
+.est{
+    width: 1000px;
+    height: 100px;
+    background: black;
+    border: 1px;
+    margin: 5px;
+}
+
+

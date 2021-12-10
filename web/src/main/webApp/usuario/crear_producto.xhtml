@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" >
+
+<ui:composition template="../web-inf/template.xhtml">
+    <ui:define name="Titulo">Crear Producto</ui:define>
+    <ui:define name="content">
+
+        <p:panel header="Registrar Producto">
+            <h:form>
+                <h:panelGrid columns="2" cellpadding="5">
+
+
+                    <p:outputLabel value="Nombre:" for="nombre_p"/>
+                    <p:inputText id="nombre_p" value="#{productoBean.producto.nombre}" required="true"/>
+
+                    <p:outputLabel value="Precio:" for="precio_p"/>
+                    <p:inputText id="precio_p" value="#{productoBean.producto.precio}" required="true" type="number"/>
+
+                    <p:outputLabel value="Unidades:" for="unidades_p"/>
+                    <p:inputText id="unidades_p" value="#{productoBean.producto.unidades}" required="true" type="number"/>
+
+                    <p:outputLabel value="Descuento:" for="descuento_p"/>
+                    <p:inputText id="descuento_p" value="#{productoBean.producto.descuento}" required="true" type="number"/>
+
+                    <p:outputLabel value="Imagenes:" for="imagenes_p"/>
+                    <p:fileUpload id="imagenes_p" listener="#{productoBean.subirImagenes}" mode="advanced" multiple="true" sizeLimit="1000000" fileLimit="5" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true" />
+
+
+
+                    <p:outputLabel value="Ciudad:" for="ciudad_p"/>
+                    <p:selectOneMenu id="ciudad_p" value="#{productoBean.producto.ciudadProducto}" converter="#{ciudadConverter}">
+                        <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true"/>
+                        <f:selectItems value="#{productoBean.ciudades}" var="ciudad" itemLabel="#{ciudad.nombre}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="Categorias:" for="categorias_p"/>
+                    <p:selectManyMenu id="categorias_p" value="#{productoBean.producto.categorias}" showCheckbox="true" required="true">
+                        <f:selectItems value="#{productoBean.categorias}" var="categoria"/>
+                    </p:selectManyMenu>
+
+                    <p:outputLabel value="Descripcion:" for="descripcion_p"/>
+                    <p:textEditor id="descripcion_p" value="#{productoBean.producto.descripcion}" height="100" secure="false"/>
+
+
+                </h:panelGrid>
+                <p:growl showDetail="true"/>
+                <p:commandButton value="Registrar producto" action="#{productoBean.registrarProducto}" update="@form" icon="pi pi-plus"  />
+
+
+            </h:form>
+        </p:panel>
+
+    </ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" >
+
+<ui:composition template="../web-inf/template.xhtml">
+    <ui:define name="Titulo">Crear Subasta Favorito</ui:define>
+    <ui:define name="content">
+
+        <h:form>
+            <p:dataView value="#{detalleSubastaBean.producto}" var="producto"  >
+
+                <p:dataViewListItem>
+                    <div class="row d-flex" >
+                        <div class="col-lg-2 col-md-1" style="text-align: center" >
+                            <p:graphicImage url="/uploads/#{producto.imagenPrincipal}" style="max-width: 120px"  />
+                            <p:rating value="#{detalleSubastaBean.calcularPromedioComentario(producto.codigo)}" readonly="true"/>
+
+                        </div>
+                        <div class="col-lg-8 col-md-1 align-self-center" >
+                            <p:outputPanel>
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <h:outputText value="Nombre:" />
+                                    <h:outputText value="#{producto.nombre}" style="font-weight:bold" />
+                                    <h:outputText value="Precio:" />
+                                    <h:outputText value="$#{producto.precio}" style="..." />
+                                    <h:outputText value="#{producto.descripcion}" escape="false" style="..." />
+                                </h:panelGrid>
+                            </p:outputPanel>
+                            <div class="box">
+                                <p>Ciudad: #{producto.ciudadProducto.nombre}</p>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-1 align-self-center" >
+
+                            <p:outputLabel value="Fecha limite" for="subastar_p"/>
+                            <p:datePicker mindate="#{detalleSubastaBean.fechaActual}" maxdate="#{detalleSubastaBean.producto.fechaLimite}" id="subastar_p" value="#{detalleSubastaBean.subasta.fechaLimite}" required="true"/>
+                            <p:commandButton  rendered="#{seguridadBean.autenticado}" value="Subastar"  icon="pi  pi-shopping-cart "  update="@form"  action="#{detalleSubastaBean.subastarProducto(producto)}"  />
+                            <p:growl for="subastar_msj" showDetail="true"/>
+
+                        </div>
+                    </div>
+
+                </p:dataViewListItem>
+            </p:dataView>
+
+        </h:form>
+
+
+    </ui:define>
+</ui:composition>
+
+</html>

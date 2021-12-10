@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" >
+
+<ui:composition template="../web-inf/template.xhtml">
+    <ui:define name="Titulo">Producto Favorito</ui:define>
+    <ui:define name="content">
+
+        <h:form>
+            <p:dataView value="#{detalleProductoFavoritoBean.producto}" var="producto"  >
+
+                <p:dataViewListItem>
+                    <div class="row d-flex" >
+                        <div class="col-lg-2 col-md-1" style="text-align: center" >
+                            <p:graphicImage url="/uploads/#{producto.imagenPrincipal}" style="max-width: 120px"  />
+                            <p:rating value="#{detalleProductoFavoritoBean.calcularPromedioComentario(producto.codigo)}" readonly="true"/>
+
+                        </div>
+                        <div class="col-lg-8 col-md-1 align-self-center" >
+                            <p:outputPanel>
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <h:outputText value="Nombre:" />
+                                    <h:outputText value="#{producto.nombre}" style="font-weight:bold" />
+                                    <h:outputText value="Precio:" />
+                                    <h:outputText value="$#{producto.precio}" style="..." />
+                                    <h:outputText value="#{producto.descripcion}" escape="false" style="..." />
+                                </h:panelGrid>
+                            </p:outputPanel>
+                            <div class="box">
+                                <p>Ciudad: #{producto.ciudadProducto.nombre}</p>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-1 align-self-center" >
+
+
+                            <p:commandButton rendered="#{seguridadBean.autenticado}" value="Agregar al carrito"  icon="pi  pi-shopping-cart "  update="@form"  action="#{seguridadBean.agragarAlCarrito(producto.codigo,producto.precio,producto.nombre,producto.imagenPrincipal)}"  />
+                            <p:growl for="add-cart" showDetail="true"/>
+
+                        </div>
+                    </div>
+
+                </p:dataViewListItem>
+            </p:dataView>
+
+        </h:form>
+        <div class="container">
+            <p:panel header="Comentarios">
+                <p:dataList id="lista-c" value="#{detalleProductoFavoritoBean.comentarios}" var="comentario" emptyMessage="No hay Comentarios">
+                    <p> #{comentario.usuarioComentario.username}:</p>
+                    <p></p>
+                    <p>#{comentario.mensaje}</p>
+                    <p:rating value="#{comentario.calificacion}" readonly="true"/>
+                </p:dataList>
+            </p:panel>
+
+            <p:panel header="Hacer un comentario" styleClass="mt-3" rendered="#{seguridadBean.autenticado}">
+
+                <h:form id="crear-comentario">
+                    <h:panelGrid columns="2" cellpadding="3">
+                        <p:inputTextarea value="#{detalleProductoFavoritoBean.nuevoComentario.mensaje}"
+                                         required="true" styleClass="comentario-usuario" />
+                        <p:rating value="#{detalleProductoFavoritoBean.nuevoComentario.calificacion}"
+                                  required="true"/>
+
+                    </h:panelGrid>
+                    <p:commandButton value="Comentar" icon="pi pi-comment" iconPos="left" update="@form,lista-c" styleClass="mt-4" action="#{detalleProductoFavoritoBean.crearComentario}" />
+                    <p:growl for="msj-pregunta" showDetail="true" />
+
+                </h:form>
+            </p:panel>
+
+        </div>
+
+    </ui:define>
+</ui:composition>
+
+</html>

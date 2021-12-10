@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" >
+
+<ui:composition template="../web-inf/template.xhtml">
+    <ui:define name="Titulo">Perfil</ui:define>
+    <ui:define name="content">
+        <h3>Datos de Usuario</h3>
+        <div class="row d-flex" >
+
+            <div class="col-lg-8 col-md-1 align-self-center" >
+                <p:outputPanel>
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputText value="Nombre :" />
+                        <h:outputText value="#{perfilBean.usuarioActual.nombre}" style="font-weight:bold" />
+                        <h:outputText value="Codigo:" />
+                        <h:outputText value="#{perfilBean.usuarioActual.codigo}" style="font-weight:bold" />
+                        <h:outputText value="Email:" />
+                        <h:outputText value="#{perfilBean.usuarioActual.email}" style="font-weight:bold" />
+                        <h:outputText value="Username:" />
+                        <h:outputText value="#{perfilBean.usuarioActual.username}" style="font-weight:bold" />
+                        <h:outputText value="Contraseña:" />
+                        <h:outputText value="#{perfilBean.usuarioActual.password}" style="font-weight:bold" />
+                        <h:outputText value="Ciudad:" />
+                        <h:outputText value="#{perfilBean.usuarioActual.ciudadUsuario.nombre}" style="font-weight:bold" />
+                    </h:panelGrid>
+                </p:outputPanel>
+            </div>
+            <h:form styleClass="col-lg-2 col-md-1 ">
+                <p:commandButton value="Mis Productos" styleClass="ui-button-help" icon="pi pi-arrow-right" iconPos="right" action="/usuario/mis_productos?faces-redirect=true"/>
+            </h:form>
+            <h:form styleClass="col-lg-2 col-md-1 ">
+                <p:commandButton value="Mis subastas" styleClass="ui-button-success " icon="pi pi-arrow-right" iconPos="right"  action="/usuario/mis_subastas?faces-redirect=true" />
+            </h:form>
+
+
+        </div>
+
+
+
+
+
+    </ui:define>
+</ui:composition>
+
+</html>

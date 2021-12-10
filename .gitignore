@@ -1,0 +1,11 @@
+#Archivos compilados
+*.class
+
+#Archivos temporales de maven
+/**/target/
+
+#Archivos de Intrllij
+*.iml
+/.idea
+
+# Ignora archivos del sistema windows

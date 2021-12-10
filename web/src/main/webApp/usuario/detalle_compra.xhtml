@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" >
+
+<ui:composition template="../web-inf/template.xhtml">
+    <ui:define name="Titulo">Detalle Compra</ui:define>
+    <ui:define name="content">
+        <h2>Detalle de la Compra</h2>
+        <h:form>
+            <p:dataView value="#{detalleCompraBean.detalleCompras}" var="detalle"  >
+                <p:dataViewListItem>
+                    <div class="row d-flex" >
+
+                        <div class="col-lg-8 col-md-1 align-self-center" >
+                            <p:outputPanel>
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <h:outputText value="Nombre Producto:" />
+                                    <h:outputText value="#{detalle.productoDetalleCompra.nombre}" style="font-weight:bold" />
+                                    <h:outputText value="Precio:" />
+                                    <h:outputText value="$#{detalle.precioProducto}" style="..." />
+                                    <h:outputText value="Unidades:" />
+                                    <h:outputText value="#{detalle.unidades}" style="..." />
+                                </h:panelGrid>
+                            </p:outputPanel>
+                        </div>
+                    </div>
+
+
+                </p:dataViewListItem>
+            </p:dataView>
+
+            <div class="float-right text-right">
+                <h4>Total:</h4>
+                <h1 >#{detalleCompraBean.subtotal}</h1>
+            </div>
+
+        </h:form>
+
+
+
+
+    </ui:define>
+</ui:composition>
+
+</html>
